@@ -9,9 +9,9 @@ RUN apt-get update && \
 		rm -rf /var/lib/apt/lists/* && \
 		rm -rf /var/cache/apk/
 
+COPY requirements.txt .
 ENV PIP_OPTIONS "--no-cache-dir --progress-bar off"
 RUN pip3 install -U pip && \
-    pip3 install poetry==1.5.0 && \
-    poetry config virtualenvs.create false 
+    pip3 install -r requirements.txt
 
 WORKDIR /workspace
