@@ -1,0 +1,15 @@
+{
+    "conventionalCommits.scopes": [
+      "lpvis"
+    ],
+    "[python]": {
+      "editor.formatOnSaveMode": "file",
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+      }
+    },
+    "python.linting.mypyEnabled": true,
+  }

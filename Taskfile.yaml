@@ -1,0 +1,28 @@
+version: '3'
+
+env:
+  SERVICE_NAME: lpvis
+
+tasks:
+  build:
+    desc: build image
+    dir: '{{.USER_WORKING_DIR}}/docker'
+    cmd: docker-compose build
+      
+  up:
+    desc: up container
+    dir: '{{.USER_WORKING_DIR}}/docker'
+    cmd: docker-compose up -d
+    
+  down:
+    desc: down containers
+    dir: '{{.USER_WORKING_DIR}}/docker'
+    cmd: docker-compose down
+
+  exec:
+    desc: enter container
+    cmd: docker exec -it $SERVICE_NAME bash
+
+  test:
+    desc: test
+    cmd: docker exec -it $SERVICE_NAME pytest -svv {{.CLI_ARGS}}

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  lpvis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace
+    image: lpvis
+    container_name: lpvis
+    tty:
+      true
+    restart: always
