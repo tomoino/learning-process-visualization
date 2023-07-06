@@ -3,7 +3,9 @@ import polars as pl
 import torch
 
 from sklearn.utils import check_random_state
-from typing import List, Union, Tuple
+from typing import List, Union
+
+from lpvis.dim_reducer.basic_dim_reducer import BasicDimReducer
 
 epsilon = 1e-16
 floath = np.float32
@@ -414,23 +416,11 @@ def _dynamic_tsne(all_step_original_df: pl.DataFrame, perplexity: float = 30.0,
 
     return all_step_visible_data
 
-class DynamicTSNE:
+class DynamicTSNE(BasicDimReducer):
     def __init__(self, output_dim: int = 2, perplexity: float = 30.0, movement_penalty: float = 0.1):
         self.output_dim = output_dim
         self.perplexity = perplexity
         self.movement_penalty = movement_penalty
-
-    def split_coords_and_meta(self, df: pl.DataFrame) -> Tuple[pl.DataFrame, pl.DataFrame]:
-        """
-        次元削減に使う情報とメタ情報を分離する
-        """
-        coords_columns = [col for col in df.columns if col.startswith("dim") or col == "t"]
-        meta_columns = [col for col in df.columns if col not in coords_columns]
-
-        coords_df = df[coords_columns]
-        meta_df = df[meta_columns]
-
-        return coords_df, meta_df
     
     def fit_transform(self, df: pl.DataFrame) -> pl.DataFrame:
         """

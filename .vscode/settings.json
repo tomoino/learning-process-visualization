@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
-      "lpvis"
+      "lpvis",
+      "dim_reducer"
     ],
     "[python]": {
       "editor.formatOnSaveMode": "file",
