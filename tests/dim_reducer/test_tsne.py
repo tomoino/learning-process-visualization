@@ -9,4 +9,4 @@ def tSNE() -> TSNE:
 
 def test_fit_transform(tSNE, high_dim_df):
     low_dim_df = tSNE.fit_transform(high_dim_df)
-    assert set(low_dim_df.columns) == {"t", "dim0", "dim1", "id"}
+    assert set(high_dim_df.columns) - set(low_dim_df.columns) == {"dim2"}

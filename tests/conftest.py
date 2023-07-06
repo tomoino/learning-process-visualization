@@ -11,6 +11,7 @@ def high_dim_df() -> DataFrame:
             "dim0": [random.random() for _ in range(9)],
             "dim1": [random.random() for _ in range(9)],
             "dim2": [random.random() for _ in range(9)],
+            "label": [0,1,2,0,1,2,0,1,2]
         }
     )
     return df

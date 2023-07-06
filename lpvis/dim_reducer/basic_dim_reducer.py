@@ -5,11 +5,11 @@ class BasicDimReducer:
     def __init__(self):
         pass
 
-    def split_coords_and_meta(self, df: pl.DataFrame) -> Tuple[pl.DataFrame, pl.DataFrame]:
+    def split_coords_and_meta(self, df: pl.DataFrame, extra_cols={}) -> Tuple[pl.DataFrame, pl.DataFrame]:
         """
         次元削減に使う情報とメタ情報を分離する
         """
-        coords_columns = [col for col in df.columns if col.startswith("dim") or col == "t"]
+        coords_columns = [col for col in df.columns if col.startswith("dim") or col == "t" or col in extra_cols]
         meta_columns = [col for col in df.columns if col not in coords_columns]
 
         coords_df = df[coords_columns]
