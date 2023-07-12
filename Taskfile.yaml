@@ -13,6 +13,11 @@ tasks:
     desc: up container
     dir: '{{.USER_WORKING_DIR}}/docker'
     cmd: docker-compose up -d
+
+  jlab:
+    desc: up container
+    dir: '{{.USER_WORKING_DIR}}/docker'
+    cmd: docker-compose up -d jlab
     
   down:
     desc: down containers
