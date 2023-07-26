@@ -3,7 +3,9 @@
       "lpvis",
       "dim_reducer",
       "jlab",
-      "data"
+      "data",
+      "visualizer",
+      "metrics"
     ],
     "[python]": {
       "editor.formatOnSaveMode": "file",
