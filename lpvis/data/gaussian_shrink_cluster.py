@@ -38,7 +38,7 @@ class GaussianShrinkCluster:
             # points = np.concatenate([points, new_points], axis=0)
             labels.extend([0]*len(new_points1) + [1]*len(new_points2) + [2]*len(new_points3))
             steps.extend([t for i in range(new_points.shape[0])])
-            coords.append(points)
+            coords.append(new_points)
 
         coords_ndarray = np.concatenate(coords, axis=0)
         ids = [i for i in range(coords_ndarray.shape[0])]

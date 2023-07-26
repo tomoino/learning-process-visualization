@@ -21,7 +21,7 @@ services:
     image: jlab_tomoino
     container_name: jlab_tomoino
     ports:
-      - 8888:8888
+      - 8885:8888
     environment:
       GRANT_SUDO: "yes"
       JUPYTER_ENABLE_LAB: "yes"

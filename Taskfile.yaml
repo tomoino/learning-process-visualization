@@ -10,7 +10,7 @@ tasks:
     cmd: docker-compose build
       
   up:
-    desc: up container
+    desc: up containers
     dir: '{{.USER_WORKING_DIR}}/docker'
     cmd: docker-compose up -d
 
