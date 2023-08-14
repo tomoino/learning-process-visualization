@@ -28,5 +28,4 @@ class VarianceMetrics:
                 metrics_col: [np.mean(trace_cov_dict[t]) for t in trace_cov_dict.keys()]
             }
         )
-
         return df

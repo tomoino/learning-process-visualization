@@ -85,12 +85,6 @@ class TimeSeriesVisualizer:
             coloraxis_showscale=False
         )
                     
-        # 3クラスタ用
-        # colorscale = [[0,'rgb(99,110,250)'], [0.5, 'rgb(239,85,59)'], [1, 'rgb(0,204,150)']]
-                    
-        # save_fig_as_gif(fig, filename, x_range, y_range, z_range=z_range, colorscale=colorscale)
-        # グラフの表示
-        # pyoff.iplot(fig)
         return fig
 
     def save_fig_as_gif(self, fig, filename, x_range, y_range, z_range=None, dtick=1, colorscale=px.colors.qualitative.Plotly, fps=2):
