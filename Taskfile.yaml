@@ -15,10 +15,14 @@ tasks:
     cmd: docker-compose up -d
 
   jlab:
-    desc: up container
-    dir: '{{.USER_WORKING_DIR}}/docker'
-    cmd: docker-compose up -d jlab
-    
+    desc: run docker container
+    cmds: 
+    - | 
+      docker run --gpus all --rm --name jlab_tomoino --shm-size=8g -p 8885:8888 \
+      -e GRANT_SUDO=yes -e JUPYTER_ENABLE_LAB=yes \
+      -v ${PWD}:/workspace -w /workspace -dit jlab_tomoino \
+      jupyter-lab --allow-root --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --NotebookApp.password='' --notebook-dir=/workspace
+
   down:
     desc: down containers
     dir: '{{.USER_WORKING_DIR}}/docker'
