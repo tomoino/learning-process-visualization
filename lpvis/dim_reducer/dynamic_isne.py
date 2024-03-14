@@ -226,8 +226,7 @@ def whitening(X_org):
     
 def embed(output_dim, num_objects, B, list_Z, max_epochs, lr, lambda1, lambda2):
     rs = check_random_state(42)
-    # device = "cuda:0"
-    device = "cpu"
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     num_references = B.shape[1]
 
@@ -346,7 +345,7 @@ def log_bilinear(coords_df, label_column, output_dim=2, learning_rate=10, lambda
         steps.extend([ float(epoch) for i in range(len(X))]) 
         
     steps_df = pl.DataFrame(
-        data={'t': steps}
+        data={'t': steps, 'label': labels}
     )
     
     reduced_X_df = pl.DataFrame(
@@ -358,10 +357,11 @@ def log_bilinear(coords_df, label_column, output_dim=2, learning_rate=10, lambda
     return visible_coords_df, Y
 
 class DynamicISNE(BasicDimReducer):
-    def __init__(self, output_dim: int = 2, time_oriented_penalty: float = 0.1, last_structure_penalty: float = 0.1):
+    def __init__(self, output_dim: int = 2, time_oriented_penalty: float = 0.1, last_structure_penalty: float = 0.1, learning_rate: float = 10):
         self.output_dim = output_dim
         self.time_oriented_penalty = time_oriented_penalty
         self.last_structure_penalty = last_structure_penalty
+        self.learning_rate = learning_rate
     
     def fit_transform(self, df: pl.DataFrame, label_column = "label") -> Tuple[pl.DataFrame, np.ndarray]:
         """
@@ -373,6 +373,6 @@ class DynamicISNE(BasicDimReducer):
                 "dim0", "dim1", ... columns are required.
         """
         coords_df, meta_df = self.split_coords_and_meta(df, extra_cols=[label_column])
-        reduced_df, references = log_bilinear(coords_df, label_column, output_dim=self.output_dim, lambda1=self.last_structure_penalty, lambda2=self.time_oriented_penalty)
+        reduced_df, references = log_bilinear(coords_df, label_column, learning_rate=self.learning_rate, output_dim=self.output_dim, lambda1=self.last_structure_penalty, lambda2=self.time_oriented_penalty)
 
         return pl.concat([reduced_df, meta_df], how="horizontal"), references

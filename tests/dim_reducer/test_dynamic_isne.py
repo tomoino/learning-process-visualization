@@ -6,7 +6,8 @@ def dynamicISNE() -> DynamicISNE:
     return DynamicISNE(
         output_dim=2,
         time_oriented_penalty = 0.1, 
-        last_structure_penalty = 0.1)
+        last_structure_penalty = 0.1,
+        learning_rate=0.1)
 
 def test_fit_transform(dynamicISNE, high_dim_df):
     low_dim_df, references = dynamicISNE.fit_transform(high_dim_df)
